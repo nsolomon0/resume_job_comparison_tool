@@ -63,5 +63,10 @@ if len(job_skills)==0:
     user_match = 0;
 else:
     user_match = float(len(matches)/len(job_skills)) * 100
-    
-print(f"\nYour match with this job: %{round(user_match,2)}")
+
+print(f"\nYour match score: %{round(user_match,2)}")
+
+missing_skills = job_skills - resume_skills
+print("\nSkills you are missing:")
+for skill in missing_skills:
+    print(">",skill)
