@@ -6,8 +6,7 @@ SKILLS = {
     "node.js","express","nestjs","python",
     "django","fastapi","flask","rest apis",
     "web services","postgresql","mongodb",
-    "dynamodb","front-end","html5","css3",
-    "scss","javascript","typescript","react",
+    "dynamodb","front-end","html","css","javascript","typescript","react",
     "angular","docker","git","aws",
     "communication","machine learning",".net",
     "data structures and algorithms","sql",
@@ -26,7 +25,7 @@ OVERLAPED_SKILLS = {
 }
 
 resume = input("Please paste the contents of your resume:")
-j_desc = input("Please paste the job requirements:")
+j_desc = input("Please enter the job requirements:")
 
 def get_skills (text):
     found = set()
@@ -35,9 +34,8 @@ def get_skills (text):
     for skill,pattern in OVERLAPED_SKILLS.items():
         if re.search(pattern,text):
             found.add(skill)
-
-
-#substring search for regular skills
+  
+    #substring search for regular skills
     for skill in SKILLS:
         if skill in text:
             found.add(skill)
@@ -45,7 +43,20 @@ def get_skills (text):
     return found
 
 
-
+#isolate skills in resume and job requirements
 resume_skills = get_skills(resume)
 job_skills = get_skills(j_desc)
-print(resume_skills)
+#print(resume_skills)
+print("\nYour Skills:")
+for skills in sorted(resume_skills):
+    print(">",skills)
+
+print("\nJob Requirement Skills:")
+for skills in sorted(job_skills):
+    print(">",skills)
+
+#logical and to isolate skills that appear in both skill sets
+matches = resume_skills & job_skills
+user_match = float(len(matches)/len(job_skills)) * 100
+print(f"\nYour match with this job: %{round(user_match,2)}")
+#print(matches)
