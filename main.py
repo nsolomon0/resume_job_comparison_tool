@@ -35,6 +35,7 @@ OVERLAPED_SKILLS = {
 }
 
 def get_skills (text):
+    """Extract known technical skills from a text string."""
     found = set()
     text = text.lower()
     #regex search for special skills that may be confused as others/other words
@@ -49,6 +50,7 @@ def get_skills (text):
 
 @app.post("/analyze")
 def analyze(data:AnalyzeRequest):
+    """Compare a resume against multiple job descriptions."""
     resume_skills = get_skills(data.resume)
     #jobs = get_skills(data.jobs)
     
@@ -72,12 +74,15 @@ def analyze(data:AnalyzeRequest):
             results, key=lambda x: (x["match_score"], -len(x["missing_skills"]))
         )
     
-    
+    if not data.jobs:
+        return{
+            "error":"Please enter at least 1 job description!"
+        }
     return {
         "results": results,
         #format the best job option based on score
         "best_job":{
-            "Your Best Match": f"Job #{best_job["job_number"]}",
-            "Best Score": f"%{best_job["match_score"]}"
+            "job_number": best_job["job_number"],
+            "match_score": best_job["match_score"]
         }
     }
