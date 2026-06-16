@@ -17,7 +17,7 @@ SKILLS = {
     "oop","fpga","version control", "vs code"
 }
 
-OVERLAPED_SKILLS = {
+OVERLAPPING_SKILLS = {
     "java": r"\bjava\b",
     "c++": r"c\+\+",
     "c#": r"c\#",
@@ -34,7 +34,7 @@ def get_skills (text):
     found = set()
     text = text.lower()
     #regex search for special skills that may be confused as others/other words
-    for skill,pattern in OVERLAPED_SKILLS.items():
+    for skill,pattern in OVERLAPPING_SKILLS.items():
         if re.search(pattern,text):
             found.add(skill)
     #substring search for regular skills
