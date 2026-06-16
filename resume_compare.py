@@ -59,11 +59,18 @@ for skills in sorted(resume_skills):
 # print("\nJob Requirement Skills:")
 # for skills in sorted(job_skills):
 #     print(">",skills)
+best_score =0
+best_job =0
 for i,job in enumerate(jobs):
     job_skills = get_skills(job)
     matches = resume_skills & job_skills
     user_match = float(len(matches)/len(job_skills))*100 if job_skills else 0
-    print(f"\nJob {i+1}")
+    if user_match > best_score:
+        best_score = user_match
+        best_job = i
+    print("\n------")
+    print(f"Job {i+1}")
+    print("------")
     print(f"Match Score: %{round(user_match,2)}")
     print(f"Matched Skills:")
     for skill in sorted(matches):
@@ -72,7 +79,9 @@ for i,job in enumerate(jobs):
     print("Skills you are missing:")
     for skill in missing_skills:
         print(">",skill)
-
+print("\n===========================================")
+print(f"You have the best chances with Job{best_job+1}: %{best_score}")
+print("===========================================")
 #logical and to isolate skills that appear in both skill sets
 #matches = resume_skills & job_skills
 
