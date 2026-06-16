@@ -12,7 +12,9 @@ SKILLS = {
     "data sctructures and algorithms","sql",
     "computer vison","cloud computing","linux",
     "grahpql","problem-solving","ui/ux",
-    "prompt engineering","tomcat","excel","matlab"
+    "prompt engineering","tomcat","excel","matlab",
+    "active directory","powershell","azure","microsoft",
+    "oop","fpga","version control"
 }
 
 def get_terms(text):
