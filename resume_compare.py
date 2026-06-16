@@ -3,7 +3,7 @@
 import re
 
 SKILLS = {
-    "node.js","express","nestjs","python",
+    "node.js","express","nextjs","python",
     "django","fastapi","flask","rest apis",
     "web services","postgresql","mongodb",
     "dynamodb","front-end","html","css","javascript","typescript","react",
@@ -11,10 +11,10 @@ SKILLS = {
     "communication","machine learning",".net",
     "data structures and algorithms","sql",
     "computer vision","cloud computing","linux",
-    "grahppql","problem-solving","ui/ux",
+    "graphpql","problem-solving","ui/ux",
     "prompt engineering","tomcat","excel","matlab",
     "active directory","powershell","azure","microsoft",
-    "oop","fpga","version control"
+    "oop","fpga","version control", "vs code"
 }
 
 OVERLAPED_SKILLS = {
@@ -57,6 +57,11 @@ for skills in sorted(job_skills):
 
 #logical and to isolate skills that appear in both skill sets
 matches = resume_skills & job_skills
-user_match = float(len(matches)/len(job_skills)) * 100
+
+#calculate percentage of user skills that match job rescriptipn
+if len(job_skills)==0:
+    user_match = 0;
+else:
+    user_match = float(len(matches)/len(job_skills)) * 100
+    
 print(f"\nYour match with this job: %{round(user_match,2)}")
-#print(matches)
