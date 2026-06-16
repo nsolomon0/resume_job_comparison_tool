@@ -24,8 +24,13 @@ OVERLAPED_SKILLS = {
     #"c": r"(?<!\w)c(?!\w)" #no words before or after the character 'c'
 }
 
-resume = input("Please paste the contents of your resume:")
-j_desc = input("Please enter the job requirements:")
+resume = input("Please enter resume skills:")
+num = int(input("How many jobs would you like to compare your resume with?:"))
+jobs = []
+for i in range(num):
+    j_desc = input(f"Please enter requirements for job #{i+1}:")
+    jobs.append(j_desc)
+
 
 def get_skills (text):
     found = set()
@@ -45,28 +50,38 @@ def get_skills (text):
 
 #isolate skills in resume and job requirements
 resume_skills = get_skills(resume)
-job_skills = get_skills(j_desc)
+#job_skills = get_skills(j_desc)
 #print(resume_skills)
 print("\nYour Skills:")
 for skills in sorted(resume_skills):
     print(">",skills)
 
-print("\nJob Requirement Skills:")
-for skills in sorted(job_skills):
-    print(">",skills)
+# print("\nJob Requirement Skills:")
+# for skills in sorted(job_skills):
+#     print(">",skills)
+for i,job in enumerate(jobs):
+    job_skills = get_skills(job)
+    matches = resume_skills & job_skills
+    user_match = float(len(matches)/len(job_skills))*100 if job_skills else 0
+    print(f"\nJob {i+1}")
+    print(f"Match Score: %{round(user_match,2)}")
+    print(f"Matched Skills:")
+    for skill in sorted(matches):
+        print(">",skill)
+    missing_skills = job_skills - resume_skills
+    print("Skills you are missing:")
+    for skill in missing_skills:
+        print(">",skill)
 
 #logical and to isolate skills that appear in both skill sets
-matches = resume_skills & job_skills
+#matches = resume_skills & job_skills
 
 #calculate percentage of user skills that match job rescriptipn
-if len(job_skills)==0:
-    user_match = 0;
-else:
-    user_match = float(len(matches)/len(job_skills)) * 100
+# if len(job_skills)==0:
+#     user_match = 0;
+# else:
+#     user_match = float(len(matches)/len(job_skills)) * 100
 
-print(f"\nYour match score: %{round(user_match,2)}")
+#print(f"\nYour match score: %{round(user_match,2)}")
 
-missing_skills = job_skills - resume_skills
-print("\nSkills you are missing:")
-for skill in missing_skills:
-    print(">",skill)
+
