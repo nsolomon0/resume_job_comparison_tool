@@ -67,7 +67,7 @@ def analyze(data:AnalyzeRequest):
             "matched_skills":sorted(matches),
             "missing_skills": sorted(missing_skills)
         })
-        #find best job
+        #find best job based on score and missing skills(in a ties)
         best_job = max(
             results, key=lambda x: (x["match_score"], -len(x["missing_skills"]))
         )
@@ -75,5 +75,9 @@ def analyze(data:AnalyzeRequest):
     
     return {
         "results": results,
-        "best_job":best_job
+        #format the best job option based on score
+        "best_job":{
+            "Your Best Match": f"Job #{best_job["job_number"]}",
+            "Best Score": f"%{best_job["match_score"]}"
+        }
     }
