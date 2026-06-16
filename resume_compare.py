@@ -57,9 +57,7 @@ for i,job in enumerate(jobs):
     matches = resume_skills & job_skills
     #calculate percentage of user skills that match job rescriptipn
     user_match = float(len(matches)/len(job_skills))*100 if job_skills else 0
-    # if user_match > best_score:
-    #     best_score = user_match
-    #     best_job = i
+
     print("\n------")
     print(f"Job {i+1}")
     print("------")
