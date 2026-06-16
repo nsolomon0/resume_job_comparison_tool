@@ -1,3 +1,20 @@
+#common skills encountered often in job requirement sections
+#skills will be used to compare against both resume and provided job requirement
+SKILLS = {
+    "node.js","express","nestjs","python",
+    "django","fastAPI","flask","rest apis",
+    "web services","postgresql","mongodb",
+    "dynamodb","front-end","html5","css3",
+    "scss","javascript","typescript","react",
+    "angular","docker","git","aws",
+    "communication","machine learning",
+    "c++","java","c#","c",".net",
+    "data sctructures and algorithms","sql",
+    "computer vison","cloud computing","linux",
+    "grahpql","problem-solving","ui/ux",
+    "prompt engineering","tomcat","excel","matlab"
+}
+
 def get_terms(text):
     return set(text.lower().replace(",","").split())
 
