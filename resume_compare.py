@@ -1,6 +1,6 @@
+import re
 #common skills encountered often in job requirement sections
 #skills will be used to compare against both resume and provided job requirement
-import re
 
 SKILLS = {
     "node.js","express","nextjs","python",
@@ -11,7 +11,7 @@ SKILLS = {
     "communication","machine learning",".net",
     "data structures and algorithms","sql",
     "computer vision","cloud computing","linux",
-    "graphpql","problem-solving","ui/ux",
+    "graphql","problem-solving","ui/ux",
     "prompt engineering","tomcat","excel","matlab",
     "active directory","powershell","azure","microsoft",
     "oop","fpga","version control", "vs code"
@@ -21,7 +21,6 @@ OVERLAPED_SKILLS = {
     "java": r"\bjava\b",
     "c++": r"c\+\+",
     "c#": r"c\#",
-    #"c": r"(?<!\w)c(?!\w)" #no words before or after the character 'c'
 }
 
 resume = input("Please enter resume skills:")
@@ -31,7 +30,6 @@ for i in range(num):
     j_desc = input(f"Please enter requirements for job #{i+1}:")
     jobs.append(j_desc)
 
-
 def get_skills (text):
     found = set()
     text = text.lower()
@@ -39,35 +37,29 @@ def get_skills (text):
     for skill,pattern in OVERLAPED_SKILLS.items():
         if re.search(pattern,text):
             found.add(skill)
-  
     #substring search for regular skills
     for skill in SKILLS:
         if skill in text:
             found.add(skill)
-
     return found
 
-
-#isolate skills in resume and job requirements
+#isolate skills in resume
 resume_skills = get_skills(resume)
-#job_skills = get_skills(j_desc)
-#print(resume_skills)
+
 print("\nYour Skills:")
 for skills in sorted(resume_skills):
     print(">",skills)
 
-# print("\nJob Requirement Skills:")
-# for skills in sorted(job_skills):
-#     print(">",skills)
-best_score =0
-best_job =0
+results = []
 for i,job in enumerate(jobs):
     job_skills = get_skills(job)
+    #logical and to isolate skills that appear in both skill sets
     matches = resume_skills & job_skills
+    #calculate percentage of user skills that match job rescriptipn
     user_match = float(len(matches)/len(job_skills))*100 if job_skills else 0
-    if user_match > best_score:
-        best_score = user_match
-        best_job = i
+    # if user_match > best_score:
+    #     best_score = user_match
+    #     best_job = i
     print("\n------")
     print(f"Job {i+1}")
     print("------")
@@ -79,18 +71,12 @@ for i,job in enumerate(jobs):
     print("Skills you are missing:")
     for skill in missing_skills:
         print(">",skill)
+    #store job comarison reults for determining best match
+    results.append((i,user_match,len(matches),len(missing_skills)))
+
+# job with highest match score is the best; if 2 jobs have the same score, choose the one with the fewer missing skills
+best_job = max(results, key=lambda x: (x[1], -x[3]))
 print("\n===========================================")
-print(f"You have the best chances with Job{best_job+1}: %{best_score}")
+print(f"You have the best chances with Job{best_job[0]+1}: %{round(best_job[1],2)}")
 print("===========================================")
-#logical and to isolate skills that appear in both skill sets
-#matches = resume_skills & job_skills
-
-#calculate percentage of user skills that match job rescriptipn
-# if len(job_skills)==0:
-#     user_match = 0;
-# else:
-#     user_match = float(len(matches)/len(job_skills)) * 100
-
-#print(f"\nYour match score: %{round(user_match,2)}")
-
 
