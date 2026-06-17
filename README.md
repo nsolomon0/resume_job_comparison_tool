@@ -31,7 +31,7 @@ A FastAPI-based REST API that analyzes resume-to-job compatibility by extracting
 ## Project Evolution
 This project began as a command-line Python application and was later refactored into a REST API using FastAPI to support structured JSON requests and responses.
 
-## Future Improvements
+## Future Enhancements
 
 - Support PDF and DOCX resume uploads in addition to plain text input.
 - Expand the skill database by storing skills in an external configuration file or database rather than hardcoding them.
