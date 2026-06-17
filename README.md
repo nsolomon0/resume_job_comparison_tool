@@ -1,6 +1,6 @@
 # Resume Matcher API
 
-Built with FastAPI.
+A FastAPI-based REST API that analyzes resume-to-job compatibility by extracting technical skills, calculating match scores, identifying skill gaps, and ranking multiple job descriptions.
 
 ## Features
 - RESTful API built with FastAPI for resume-to-job analysis
@@ -27,6 +27,20 @@ Built with FastAPI.
 - Uvicorn ASGI server for local API deployment and testing
 - Developed and version-controlled using Git
 - Executed in a Linux (WSL) development environment
+
+## Project Evolution
+This project began as a command-line Python application and was later refactored into a REST API using FastAPI to support structured JSON requests and responses.
+
+## Future Improvements
+
+- Support PDF and DOCX resume uploads in addition to plain text input.
+- Expand the skill database by storing skills in an external configuration file or database rather than hardcoding them.
+- Implement NLP-based skill extraction using libraries to improve recognition of skills and reduce reliance on exact keyword matches.
+- Add skill weighting to prioritize important technologies over less critical skills when calculating match scores.
+- Introduce fuzzy matching to recognize related technologies and alternative skill names.
+- Store analysis results in a PostgreSQL database for historical tracking and reporting.
+- Develop a React frontend to provide a user-friendly interface for resume analysis.
+- Deploy the API to a cloud platform such as AWS, Azure, or Render for public access.
 
 ## Run
 
