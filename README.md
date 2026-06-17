@@ -8,7 +8,7 @@ A FastAPI-based REST API that analyzes resume-to-job compatibility by extracting
 - Automated comparison of resume skills against multiple job descriptions
 - Match score calculation based on skill overlap percentages
 - Skill gap analysis highlighting missing qualifications for each role
-- Best-fit job identification using score-based ranking and tie-breaking logic
+- Best-fit job identification using score-based ranking with skill-gap tie breaking
 - Interactive API documentation generated automatically via Swagger/OpenAPI
 - JSON-based request and response handling for easy integration with web applications
 
@@ -41,6 +41,11 @@ This project began as a command-line Python application and was later refactored
 - Store analysis results in a PostgreSQL database for historical tracking and reporting.
 - Develop a React frontend to provide a user-friendly interface for resume analysis.
 - Deploy the API to a cloud platform such as AWS, Azure, or Render for public access.
+
+## Technical Notes
+
+- Skill extraction is performed once on the resume and reused across all job comparisons to avoid redundant processing.
+- Set intersection and difference operations are used to efficiently compute matches and skill gaps.
 
 ## Installation
 
