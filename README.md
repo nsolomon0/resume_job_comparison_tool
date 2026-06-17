@@ -42,6 +42,80 @@ This project began as a command-line Python application and was later refactored
 - Develop a React frontend to provide a user-friendly interface for resume analysis.
 - Deploy the API to a cloud platform such as AWS, Azure, or Render for public access.
 
-## Run
+## Installation
 
+```bash
+git clone <repository-url>
+cd resume_job_comparison_tool
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+## Running the API
+
+```bash
 uvicorn main:app --reload
+```
+Navigate to:
+
+http://127.0.0.1:8000/docs
+
+to access the interactive Swagger UI.
+
+## Example Request
+
+```json
+{
+  "resume": "I have 10 years of C++ and Python experience. I am skilled with Git version control, JavaScript and CSS.",
+  "jobs": [
+        "Must know HTML CSS and JavaScript.", 
+        "Git is an asset, as well as familiarity with machine learning and OOP concepts", 
+        "Proficient with Microsoft Office, namely Excel"
+  ]
+}
+```
+## Example Response
+
+```json
+{
+  "results": [
+    {
+      "job_number": 1,
+      "match_score": 66.67,
+      "matched_skills": [
+        "css",
+        "javascript"
+      ],
+      "missing_skills": [
+        "html"
+      ]
+    },
+    {
+      "job_number": 2,
+      "match_score": 33.33,
+      "matched_skills": [
+        "git"
+      ],
+      "missing_skills": [
+        "machine learning",
+        "oop"
+      ]
+    },
+    {
+      "job_number": 3,
+      "match_score": 0,
+      "matched_skills": [],
+      "missing_skills": [
+        "excel",
+        "microsoft"
+      ]
+    }
+  ],
+  "best_job": {
+    "job_number": 1,
+    "match_score": 66.67
+  }
+}
+```
